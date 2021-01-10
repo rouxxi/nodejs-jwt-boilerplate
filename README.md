@@ -1,4 +1,4 @@
-Télécharge ce _boilerplate_ afin de démarrer le tutoriel : [https://github.com/bastienwcs/nodejs-jwt-boilerplate](https://github.com/bastienwcs/nodejs-jwt-boilerplate)
+Télécharge ce _boilerplate_ afin de démarrer le tutoriel : [https://github.com/bastienwcs/nodejs-jwt-boilerplate](https://github.com/bastienwcs/nodejs-jwt-boilerplate).
 
 ![Structure](pictures/1-structure.png)
 
@@ -13,6 +13,10 @@ Afin de gérer l'inscription et la connexion d'utilisateurs, crée une nouvelle 
 ### Variables d'environnements
 
 Dans le projet, copie le fichier `.env.sample` vers `.env` et modifie les variables d'environnements correspondantes à la base de données.
+
+### Installation
+
+Pense à installer le projet avec `npm install` avant de démarrer !
 
 ## 1 - Création d'un compte utilisateur
 
