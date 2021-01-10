@@ -1,4 +1,4 @@
-Téléchargez ce _boilerplate_ afin de démarrer le tutoriel : [https://github.com/bastienwcs/nodejs-jwt-boilerplate](https://github.com/bastienwcs/nodejs-jwt-boilerplate)
+Télécharge ce _boilerplate_ afin de démarrer le tutoriel : [https://github.com/bastienwcs/nodejs-jwt-boilerplate](https://github.com/bastienwcs/nodejs-jwt-boilerplate)
 
 ![Structure](pictures/1-structure.png)
 
@@ -6,13 +6,13 @@ Téléchargez ce _boilerplate_ afin de démarrer le tutoriel : [https://github.c
 
 ### Base de données
 
-Afin de gérer l'inscription et la connexion d'utilisateurs, créez une nouvelle base de données nommée `jwtcourse` et créez la table `user` en respectant cette modélisation :
+Afin de gérer l'inscription et la connexion d'utilisateurs, crée une nouvelle base de données nommée `jwtcourse` et crée la table `user` en respectant cette modélisation :
 
 ![Database](pictures/2-database.png)
 
 ### Variables d'environnements
 
-Dans le projet, copiez le fichier `.env.sample` vers `.env` et modifiez les variables d'environnements correspondantes à la base de données.
+Dans le projet, copie le fichier `.env.sample` vers `.env` et modifie les variables d'environnements correspondantes à la base de données.
 
 ## 1 - Création d'un compte utilisateur
 
@@ -45,7 +45,7 @@ Si tout c'est bien passé, renvoyer un code 201 avec un json ayant la structure 
 
 > Ne pas renvoyer le mot de passe renseigné mais la chaîne de caractère "hidden"
 
-Testez le tout avec Postman :
+Teste le tout avec Postman :
 
 - POST http://localhost:8080/register
 - Body / raw / JSON
@@ -62,7 +62,7 @@ Testez le tout avec Postman :
 
 ### Solution
 
-> **Attention** : essai de faire l'exercice par toi-même avant de regarder la solution !
+> **Attention** : essaie de faire l'exercice par toi-même avant de regarder la solution !
 
 -
 -
@@ -105,13 +105,13 @@ app.post('/register', (req, res) => {
 
 ## 2 - Hashage du mot de passe
 
-Il est une très dangereux de laisser le mot de passe de l'utilisateur _en clair_ dans une base de données.
+Il est très dangereux de laisser le mot de passe de l'utilisateur _en clair_ dans une base de données.
 
 Regarde le lien suivant pour voir comment _hasher_ le mot de passe avec la bibliothèque _bcrypt_ : [https://www.abeautifulsite.net/hashing-passwords-with-nodejs-and-bcrypt](https://www.abeautifulsite.net/hashing-passwords-with-nodejs-and-bcrypt).
 
 Installe le module [bcrypt](https://www.npmjs.com/package/bcrypt) dans ton projet.
 
-Ensuite modifie ta route `/register` pour encrypter le mot de passe de façon synchrone, **avant** qu'il ne soit enregistré dans la base de données.
+Ensuite modifie ta route `/register` pour crypter le mot de passe de façon synchrone, **avant** qu'il ne soit enregistré dans la base de données.
 
 Vérifie que le mot de passe est bien encrypté dans la base de donnée.
 
@@ -119,7 +119,7 @@ Vérifie que le mot de passe est bien encrypté dans la base de donnée.
 
 ### Solution
 
-> **Attention** : essai de faire l'exercice par toi-même avant de regarder la solution !
+> **Attention** : essaie de faire l'exercice par toi-même avant de regarder la solution !
 
 -
 -
@@ -177,13 +177,13 @@ La route doit récupérer du corps de la requête un json à la structure suivan
 
 Si l'email ou le mot de passe ne sont pas renseignés, renvoyer une erreur 400 'Please specify both email and password'.
 
-Dans le cas où ils sont renseignés, faire une requête à la base de données et vérifier que l'email existe bien (**email uniquement, pas le mot de passe !**).
+Dans le cas où ils sont renseignés, faire une requête à la base de données et vérifier que l'email existe bien (**tester l'email uniquement, pas le mot de passe !**).
 
 Si une erreur survient lors de l'exécution de la requête SQL, renvoyer une erreur 500 avec le message d'erreur correspondant.
 
 Si le résultat renvoyé est vide, renvoyer une erreur 403 'Invalid email'.
 
-Si le résultat n'est pas vide, nous allons maintenant vérifier le mot de passe en utilisant la méthode `compareSync` du module _bcrypt_. Tu peux trouver un exemple d'utilisation ici : [https://www.abeautifulsite.net/hashing-passwords-with-nodejs-and-bcrypt](https://www.abeautifulsite.net/hashing-passwords-with-nodejs-and-bcrypt).
+Si le résultat n'est pas vide, tu vas maintenant vérifier le mot de passe en utilisant la méthode `compareSync` du module _bcrypt_. Tu peux trouver un exemple d'utilisation ici : [https://www.abeautifulsite.net/hashing-passwords-with-nodejs-and-bcrypt](https://www.abeautifulsite.net/hashing-passwords-with-nodejs-and-bcrypt).
 
 > Attention, il faut mettre le mot de passe _en clair_ en premier argument et le mot de passe de la base de données en second
 
@@ -197,9 +197,9 @@ Si tout le mot de passe est identique, renvoyer un code 200 avec un json ayant l
 }
 ```
 
-Sinon renvoyez une erreur 403 avec le message 'Invalid password'.
+Sinon renvoie une erreur 403 avec le message 'Invalid password'.
 
-Testez le tout avec Postman :
+Teste le tout avec Postman :
 
 - POST http://localhost:8080/login
 - Body / raw / JSON
@@ -216,7 +216,7 @@ Testez le tout avec Postman :
 
 ### Solution
 
-> **Attention** : essai de faire l'exercice par toi-même avant de regarder la solution !
+> **Attention** : essaie de faire l'exercice par toi-même avant de regarder la solution !
 
 -
 -
@@ -267,14 +267,14 @@ app.post('/login', (req, res) => {
 
 ## 4 - Création d'un JSON Web Token
 
-Nous retrons enfin dans le vif du sujet : la génération du JWT grâce à une clef secrête.
+Tu rentres enfin dans le vif du sujet : la génération du JWT grâce à une clef secrète.
 
 Commence par renseigner une clé secrète dans le fichier `.env`. Tu peux générer une clé sécurisée ici : [https://www.grc.com/passwords.htm](https://www.grc.com/passwords.htm).
 
-Ensuite, nous allons utiliser le module [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) pour effectuer la génération de la clé :
+Ensuite, tu vas utiliser le module [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) pour effectuer la génération de la clé :
 
 - installe le module
-- utilise la la méthode `sign` afin de générer un JWT, en utilisant la clé secrète des variables d'environnement.
+- utilise la méthode `sign` afin de générer un JWT, en utilisant la clé secrète des variables d'environnement.
 - Le _payload_ de la clé sera le json suivant : `json { id: user.id } `
 - la date d'expiration `expiresIn` sera de une heure.
 
@@ -295,7 +295,7 @@ Génère la clé juste avant de renvoyer utilisateur dans la route `/login` et f
 
 ### Solution
 
-> **Attention** : essai de faire l'exercice par toi-même avant de regarder la solution !
+> **Attention** : essaie de faire l'exercice par toi-même avant de regarder la solution !
 
 -
 -
@@ -374,7 +374,7 @@ Si tout c'est bien passé, renvoyer un code 200 avec un json ayant la structure 
 
 ### Solution
 
-> **Attention** : essai de faire l'exercice par toi-même avant de regarder la solution !
+> **Attention** : essaie de faire l'exercice par toi-même avant de regarder la solution !
 
 -
 -
@@ -406,9 +406,9 @@ app.get('/users', (req, res) => {
 
 ## 6 - Création d'un middleware d'authentification
 
-Afin de protéger la route `/users` pour que seuls les utilisateurs authentifiés y accède, nous allons créer un _middleware_ qui va récupérer l'entête de la requête et y regarder la présence d'un _token_.
+Afin de protéger la route `/users` pour que seuls les utilisateurs authentifiés puissent y accéder, tu vas créer un _middleware_ qui va récupérer l'entête de la requête et y regarder la présence d'un _token_.
 
-Pour cette partie là, le _middleware_ est fourni et à ajouter **avant** la route `/users` :
+Pour cette partie là, le _middleware_ est fourni et est à ajouter **avant** la route `/users` :
 
 ```js
 const authenticateWithJsonWebToken = (req, res, next) => {
@@ -431,7 +431,7 @@ const authenticateWithJsonWebToken = (req, res, next) => {
 };
 ```
 
-Vous allez devoir modifier la route user afin qu'elle charge ce _middleware_, puis tester la route avec Postman en renseignant l'entête suivante : `Authorization: Bearer eyJhbG.. ...8RvKts`
+Tu vas devoir modifier la route user afin qu'elle charge ce _middleware_, puis tester la route avec Postman en renseignant l'entête suivante : `Authorization: Bearer eyJhbG.. ...8RvKts`
 
 Bien sûr, il faudra remplacer le _token_ par celui récupéré lors de la connexion de l'utilisateur dans l'étape 4.
 
@@ -439,7 +439,7 @@ Bien sûr, il faudra remplacer le _token_ par celui récupéré lors de la conne
 
 ### Solution
 
-> **Attention** : essai de faire l'exercice par toi-même avant de regarder la solution !
+> **Attention** : essaie de faire l'exercice par toi-même avant de regarder la solution !
 
 -
 -
