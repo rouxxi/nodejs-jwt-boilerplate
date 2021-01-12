@@ -72,8 +72,10 @@ app.post('/login', (req, res) => {
             email,
             password: 'hidden',
           };
-          const token = jwt.sign({ id: user.id}, JWT_SECRET, { expiresIn: '1h' });
-          res.status(200).json(user, token);
+          const token = jwt.sign({ id: user.id }, JWT_SECRET, {
+            expiresIn: '1h',
+          });
+          res.status(200).json({ user, token });
         } else {
           // Passwords don't match
           res.status(403).json({ errorMessage: 'Invalid password' });
